@@ -19,9 +19,12 @@ function day1() {
     ];
   }, []);
 
-  const elfToAskFood = Math.max(...elves.map((elf) => elf.total));
+  const elvesToAskFood = elves
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 3)
+    .reduce((acc, elf) => acc + elf.total, 0);
 
-  console.info(elfToAskFood);
+  console.info(elvesToAskFood);
 }
 
 export default day1;
