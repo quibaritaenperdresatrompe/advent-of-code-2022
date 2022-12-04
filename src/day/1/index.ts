@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import readInput from "../../utils/readInput";
-import { Elve } from "../../utils/types";
+import { Elve } from "./types";
 
 function day1() {
   console.info(
