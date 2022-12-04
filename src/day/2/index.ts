@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import readInput from "../../utils/readInput";
+import play from "./play";
 
 enum OpponentShape {
   A = 1,
@@ -13,32 +14,24 @@ enum MyShape {
   Z = 3,
 }
 
-function play(opponent: number, me: number) {
-  if (opponent < me) {
-    return me + 6;
-  }
-  if (opponent === me) {
-    return me + 3;
-  }
-  return me;
-}
-
 function day2() {
   console.info(
     "What would your total score be if everything goes exactly according to your strategy guide?"
   );
 
-  const rounds = readInput(resolve(__dirname, "input"));
+  const lines = readInput(resolve(__dirname, "input"));
 
-  const score = rounds.reduce((acc, round) => {
-    const [opponent, me] = round.split(" ");
-    if (!opponent || !me) {
-      return acc;
-    }
-    const result = play(
-      OpponentShape[opponent as keyof typeof OpponentShape],
-      MyShape[me as keyof typeof MyShape]
-    );
+  const rounds = lines
+    .map((round) => {
+      const shapes = round.split(" ");
+      const opponent = OpponentShape[shapes[0] as keyof typeof OpponentShape];
+      const me = MyShape[shapes[1] as keyof typeof MyShape];
+      return [opponent, me];
+    })
+    .filter((round) => round.filter(Boolean).length === 2);
+
+  const score = rounds.reduce((acc, [opponent, me]) => {
+    const result = play(opponent, me);
     return acc + result;
   }, 0);
 
