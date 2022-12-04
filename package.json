@@ -4,11 +4,12 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npx ts-node src/index.ts"
+    "start": "npx ts-node --swc src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@swc/core": "^1.3.21",
     "@types/node": "^18.11.10",
     "@types/yargs": "^17.0.15",
     "ts-node": "^10.9.1",
